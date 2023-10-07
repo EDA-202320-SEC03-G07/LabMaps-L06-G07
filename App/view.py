@@ -115,10 +115,14 @@ def printBooksbyTitle(books):
     Completar la descripcion de printBooksbyTitle
     """
     if books:
-        print('Se encontro el libro solicitado: ')
-        
-        print("Titulo original:", str(books["title"]), "Año de publicacion: ", str(books["original_publication_year"]), "ISBN:", str(books["isbn"]))
-        print("")
+        print('\nSe encontró el libro solicitado:')
+        print('-' * 50)  
+        print(f"Título original: {books['title']}")
+        print(f"Autor: {books['authors']}")
+        print(f"Año de publicación: {int(float(books['original_publication_year']))}")
+        print(f"Rating promedio: {books['average_rating']}")
+        print(f"ISBN: {books['isbn']}")
+        print('-' * 50)
         print("\n")
     else:
         print("No se encontraron libros.\n")

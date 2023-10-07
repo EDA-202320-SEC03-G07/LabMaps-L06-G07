@@ -53,13 +53,13 @@ def newCatalog():
 
     Retorna el catalogo inicializado.
     """
-    # TODO lab 6, agregar llave de "titles" para el indice de libros
+    
     catalog = {'books': None,
                'bookIds': None,
                'authors': None,
                'tags': None,
                'tagIds': None,
-               'years': None}
+               'years': None, 'titles': None}
 
     """
     Esta lista contiene todo los libros encontrados
@@ -119,8 +119,7 @@ def newCatalog():
     Este indice crea un map cuya llave es el titulo del libro
     La columna 'titles' del archivo books.csv
     """
-    # TODO lab 6, agregar el ADT map con newMap()
-    catalog['titles'] = None
+    catalog['titles'] = mp.newMap(10000,maptype='CHAINING',loadfactor=4,cmpfunction=compareTitles)
 
     return catalog
 
@@ -270,7 +269,11 @@ def addBookTitle(catalog, title):
     """
     Completar la descripcion de addBookTitle
     """
-    pass
+    books = catalog["books"]
+    for book in lt.iterator(books):
+        if book["title"] == title:
+            mp.put(catalog["titles"], title, book)
+            break
 
 
 # ==============================
@@ -314,7 +317,13 @@ def getBookByTitle(catalog, title):
     """
     Completar la descripcion de getBookByTitle
     """
-    pass
+    book = mp.get(catalog['titles'], title)
+    if book is None:
+        addBookTitle(catalog, title)
+        book = mp.get(catalog['titles'], title)
+    return me.getValue(book) if book else None
+
+
 
 
 def booksSize(catalog):
@@ -343,7 +352,7 @@ def titlesSize(catalog):
     """
     Completar la descripcion de titlesSize
     """
-    pass
+    return mp.size(catalog['titles'])
 
 
 # ==============================
@@ -442,4 +451,10 @@ def compareTitles(title, book):
         int: retrona 0 si son iguales, 1 si el primero es mayor
         y -1 si el primero es menor
     """
-    pass
+    book_title = me.getKey(book)
+    if (title == book_title):
+        return 0
+    elif (title > book_title):
+        return 1
+    else:
+        return -1

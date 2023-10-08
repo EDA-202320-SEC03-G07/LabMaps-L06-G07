@@ -118,7 +118,7 @@ def printBooksbyTitle(books):
         print('\nSe encontró el libro solicitado:')
         print('-' * 50)  
         print(f"Título original: {books['title']}")
-        print(f"Autor: {books['authors']}")
+        print(f"Autor/es: {books['authors']}")
         print(f"Año de publicación: {int(float(books['original_publication_year']))}")
         print(f"Rating promedio: {books['average_rating']}")
         print(f"ISBN: {books['isbn']}")

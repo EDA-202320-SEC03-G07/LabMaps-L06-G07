@@ -264,15 +264,15 @@ def addBookTag(catalog, tag):
             lt.addLast(tagbook['value']['books'], book['value'])
 
 
-def addBookTitle(catalog, title):
+def addBookTitle(catalog, book):
     # TODO lab 6, agregar el libro al map de titulos
     """
     Completar la descripcion de addBookTitle
     """
     books = catalog["books"]
     for book in lt.iterator(books):
-        if book["title"] == title:
-            mp.put(catalog["titles"], title, book)
+        if book["title"] == book['original_title']:
+            mp.put(catalog["titles"], book['original_title'] , book)
             break
 
 

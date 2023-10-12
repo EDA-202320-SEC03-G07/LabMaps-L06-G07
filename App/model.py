@@ -172,6 +172,7 @@ def addBook(catalog, book):
     lt.addLast(catalog['books'], book)
     mp.put(catalog['bookIds'], book['goodreads_book_id'], book)
     authors = book['authors'].split(",")  # Se obtienen los autores
+    addBookTitle(catalog,book)
     for author in authors:
         addBookAuthor(catalog, author.strip(), book)
     addBookYear(catalog, book)
@@ -264,7 +265,7 @@ def addBookTag(catalog, tag):
             lt.addLast(tagbook['value']['books'], book['value'])
 
 
-def addBookTitle(catalog, book):
+
 def addBookTitle(catalog, book):
     # TODO lab 6, agregar el libro al map de titulos
     """

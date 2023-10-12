@@ -264,17 +264,16 @@ def addBookTag(catalog, tag):
             lt.addLast(tagbook['value']['books'], book['value'])
 
 
-def addBookTitle(catalog, title):
+def addBookTitle(catalog, book):
     # TODO lab 6, agregar el libro al map de titulos
     """
     Completar la descripcion de addBookTitle
     """
     books = catalog["books"]
-    for book in lt.iterator(books):
-        if book["title"] == title:
-            mp.put(catalog["titles"], title, book)
-            break
-
+    for title in lt.iterator(books):
+        if title["title"] == book:
+            mp.put(catalog["titles"], book, title)
+    
 
 # ==============================
 # Funciones de consulta
@@ -322,9 +321,6 @@ def getBookByTitle(catalog, title):
         addBookTitle(catalog, title)
         book = mp.get(catalog['titles'], title)
     return me.getValue(book) if book else None
-
-
-
 
 def booksSize(catalog):
     """
